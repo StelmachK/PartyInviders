@@ -8,29 +8,45 @@
 
 <html>
 <head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
     <title>RsvpForm</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/Style.css" />
 </head>
 <body>
-    @using (Html.BeginForm())
-    {
-
-        <div>
-            <p>Imię i nazwisko: @Html.TextBoxFor(x => x.Name)</p>
-            <p>Email: @Html.TextBoxFor(x => x.Email)</p>
-            <p>Telefon : @Html.TextBoxFor(x => x.Phone)</p>
-            <p>
-                Czy przyjdzieszna  przyjęcie?
-                @Html.DropDownListFor(x => x.WillAttned, new[]
-       {
-           new SelectListItem() {Text = "Tak, przyjdę", Value = bool.TrueString },
-           new SelectListItem() {Text = "Nie, nie przyjdę", Value = bool.FalseString }
-       }, "Wybierz opcję")
-
-                <input type="submit" value="Wyślij PSVP" />
-            </p>
+    <div class="panel panel-success">
+        <div class="panel-heading text-center"><h4>RSVP</h4></div>
+        <div class="panel-body">
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary()
+                <div class="form-group">
+                    <label>Imię i nazwisko:</label>
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Twój e-mail:</label>
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Twój telefon:</label>
+                    @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label>Czy przyjdziesz na przyjęcie?</label>
+                    @Html.DropDownListFor(x => x.WillAttend, new[] {
+                        new SelectListItem() {Text = "Tak, przyjdę.",
+                        Value = bool.TrueString},
+                        new SelectListItem() {Text = "Nie, nie przyjdę.",
+                        Value = bool.FalseString}
+                        }, "Wybierz opcję", new { @class = "form-control" })
+                </div>
+                <div class="text-center">
+                    <input class="btn btn-success" type="submit" value="Wyślij RSVP" />
+                </div>
+            }
         </div>
-    }
-
+    </div>
 </body>
 </html>
